@@ -1,0 +1,41 @@
+{
+  "name": "Azernet Inventory",
+  "short_name": "Azernet",
+  "description": "Professional inventory management system for businesses",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Inventory",
+      "short_name": "Inventory",
+      "description": "View and manage inventory",
+      "url": "/inventory.html",
+      "icons": [
+        {
+          "src": "assets/logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
