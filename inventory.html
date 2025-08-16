@@ -70,7 +70,6 @@
               <div class="dropdown-item" data-settings="inventory">Inventory Management</div>
               <div class="dropdown-item" data-settings="accounts">Accounts and Security</div>
               <div class="dropdown-item" data-settings="detailed">Detailed Report</div>
-              <div class="dropdown-item" data-settings="share">Share My Shop</div>
               <div class="dropdown-item" data-settings="contact">Contact Us</div>
               <div class="dropdown-item" data-settings="about">About Us</div>
             </div>
@@ -131,7 +130,7 @@
       <label>Item Type: <input type="text" name="type" required></label>
       <label>Purchase Price (ETB):
         <div class="purchase-row">
-          <input type="number" name="purchasePrice" step="0.01" required>
+          <input type="number" name="purchasePrice" required>
           <select name="paymentStatus" aria-label="Payment Status">
             <option value="paid">Paid</option>
             <option value="unpaid">Unpaid</option>
@@ -151,7 +150,7 @@
         <label>Pcs per Pack: <input type="number" name="amountInPack" style="width: 85px;" required></label>
       </div>
       <p>Optional</p>
-      <label>Selling Price (ETB): <input type="number" name="sellingPrice" step="0.01" required></label>
+              <label>Selling Price (ETB): <input type="number" name="sellingPrice" required></label>
       <label>Description: <textarea name="description"></textarea></label>
       <button type="submit">Save</button>
     </form>
@@ -216,7 +215,7 @@
     </div>
     <div class="sale-confirmation">
       <h3>Sale Successful!</h3>
-      <p id="confirmationMessage">Sell completed successfully.</p>
+      <p id="confirmationMessage">You have successfully sold to <span id="confirmationCustomerName">Customer</span>.</p>
       <div id="confirmationItems" class="confirmation-items"></div>
       <div class="confirmation-total">
         <strong>Total Price: <span id="confirmationTotal">0</span> ETB</strong>
@@ -486,53 +485,6 @@
     </div>
   </div>
 
-  <!-- Share My Shop Settings -->
-  <div id="shareSettings" class="settings-page hidden">
-    <div class="settings-header">
-      <img src="assets/back.png" alt="Back" class="back-icon settings-back-btn">
-      <h2>Share My Shop</h2>
-      <button class="save-btn">Save</button>
-    </div>
-    <div class="settings-content">
-      <div class="settings-section">
-        <h3>Share Options</h3>
-        <div class="setting-item">
-          <label>Show selling price</label>
-          <label class="toggle">
-            <input type="checkbox" id="shareSellingPrice" checked>
-            <span class="slider"></span>
-          </label>
-        </div>
-        <div class="setting-item">
-          <label>Show description</label>
-          <label class="toggle">
-            <input type="checkbox" id="shareDescription" checked>
-            <span class="slider"></span>
-          </label>
-        </div>
-        <div class="setting-item">
-          <label>Show item type</label>
-          <label class="toggle">
-            <input type="checkbox" id="shareItemType" checked>
-            <span class="slider"></span>
-          </label>
-        </div>
-        <div class="setting-item">
-          <label>Show stock</label>
-          <label class="toggle">
-            <input type="checkbox" id="shareStock" checked>
-            <span class="slider"></span>
-          </label>
-        </div>
-      </div>
-      
-      <div class="settings-section">
-        <h3>Share Link</h3>
-        <button class="copy-link-btn" id="copyLinkBtn">Copy Link</button>
-      </div>
-    </div>
-  </div>
-
   <!-- Contact Us Settings -->
   <div id="contactSettings" class="settings-page hidden">
     <div class="settings-header">
@@ -585,5 +537,4 @@
   <script src="inventory.js"></script>
   <script src="pwa.js"></script>
 </body>
-
 </html>
