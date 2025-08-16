@@ -585,6 +585,8 @@ function checkAuth() {
   
   try {
     currentUser = JSON.parse(userData);
+    // Load user data from UserDB to get the latest store name
+    loadUserDataFromDB();
     updateHeaderWithUserInfo();
     return true;
   } catch (error) {
@@ -702,6 +704,30 @@ function saveInventory() {
   // Clear existing items and add current ones
   store.clear();
   inventory.forEach(item => store.put(item));
+}
+
+function loadUserDataFromDB() {
+  if (!currentUser || !('indexedDB' in window)) return;
+  
+  const request = indexedDB.open('UserDB', 1);
+  request.onsuccess = (event) => {
+    const userDB = event.target.result;
+    const tx = userDB.transaction(['users'], 'readonly');
+    const store = tx.objectStore('users');
+    const getReq = store.get(currentUser.id);
+    getReq.onsuccess = () => {
+      const user = getReq.result;
+      if (user) {
+        // Update currentUser with data from UserDB
+        if (user.storeName) currentUser.storeName = user.storeName;
+        if (user.storeType) currentUser.storeType = user.storeType;
+        if (user.emailPhone) currentUser.emailPhone = user.emailPhone;
+        // Update localStorage with the latest data
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        updateHeaderWithUserInfo();
+      }
+    };
+  };
 }
 
 function loadProfileFromDB() {
