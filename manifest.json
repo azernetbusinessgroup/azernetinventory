@@ -1,0 +1,119 @@
+{
+  "name": "Azernet Inventory",
+  "short_name": "Azernet",
+  "description": "Professional inventory management system for businesses",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Inventory",
+      "short_name": "Inventory",
+      "description": "View and manage inventory",
+      "url": "/inventory.html",
+      "icons": [
+        {
+          "src": "assets/logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Add Item",
+      "short_name": "Add",
+      "description": "Add new inventory item",
+      "url": "/inventory.html?action=add",
+      "icons": [
+        {
+          "src": "assets/logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Quick Report",
+      "short_name": "Report",
+      "description": "View quick inventory report",
+      "url": "/inventory.html?action=report",
+      "icons": [
+        {
+          "src": "assets/logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

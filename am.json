@@ -1,0 +1,284 @@
+{
+  "app": {
+    "title": "የእቃዎች አስተዳደር",
+    "storeName": "የሱቅ ስም"
+  },
+  "header": {
+    "settings": "ቅንብሮች",
+    "profile": "መገለጫ"
+  },
+  "search": {
+    "placeholder": "እቃ ፈልግ...",
+    "filter": "ፊልተር"
+  },
+  "footer": {
+    "addItem": "እቃ ጨምር",
+    "quickReport": "ፈጣን ሪፖርት",
+    "sellItems": "እቃዎች ሽጥ"
+  },
+  "modals": {
+    "addItem": {
+      "title": "እቃ ጨምር",
+      "close": "ዝጋ",
+      "imageUpload": "ምስል ጨምር",
+      "form": {
+        "itemName": "የእቃው ስም:",
+        "itemType": "የእቃው አይነት:",
+        "purchasePrice": "የግዛት ዋጋ (ብር):",
+        "paymentStatus": "የግዛት ሁኔታ",
+        "paid": "የተከፈለ",
+        "unpaid": "ያልተከፈለ",
+        "quantity": "ብዛት:",
+        "packs": "ጥራጊያዎች",
+        "pieces": "ቁርጥራጮች",
+        "pcsPerPack": "በጥራጊያ ውስጥ ያሉ ቁርጥራጮች:",
+        "optional": "የሚፈለግ",
+        "sellingPrice": "የመሸጫ ዋጋ (ብር):",
+        "description": "መግለጫ:",
+        "save": "አስቀምጥ"
+      }
+    },
+    "itemDetail": {
+      "edit": "አርትዕ",
+      "close": "ዝጋ",
+      "actions": {
+        "add": "ጨምር",
+        "delete": "ሰርዝ",
+        "sell": "ሽጥ"
+      },
+      "sellForm": {
+        "amount": "ብዛት",
+        "unit": "የመለኪያ አሃድ",
+        "unitPrice": "የአንድ አሃድ ዋጋ",
+        "status": "ሁኔታ",
+        "customerName": "የደንበኛው ስም",
+        "sell": "ሽጥ"
+      },
+      "addForm": {
+        "purchasePrice": "የግዛት ዋጋ",
+        "paymentStatus": "የግዛት ሁኔታ",
+        "amount": "ብዛት",
+        "unit": "የመለኪያ አሃድ",
+        "save": "አስቀምጥ"
+      }
+    },
+    "sellItems": {
+      "close": "ዝጋ",
+      "counter": "0 / 0",
+      "navigation": {
+        "previous": "የቀድሞ",
+        "next": "ቀጣይ"
+      },
+      "sell": "ሽጥ"
+    },
+    "quickReport": {
+      "close": "ዝጋ",
+      "title": "የዕለቱ ሪፖርት",
+      "fields": {
+        "date": "ቀን",
+        "totalPurchases": "ጠቅላላ ግዛቶች",
+        "totalSales": "ጠቅላላ ሽጥ",
+        "profit": "ትርፍ",
+        "payables": "የሚከፈል",
+        "receivables": "የሚቀበል",
+        "itemsSold": "የተሸጡ እቃዎች ብዛት"
+      },
+      "actions": {
+        "itemsSold": "የተሸጡ እቃዎች",
+        "itemsPurchased": "የተገዙ እቃዎች",
+        "payables": "የሚከፈል",
+        "receivables": "የሚቀበል"
+      }
+    },
+    "saleConfirmation": {
+      "close": "ዝጋ",
+      "title": "ሽጥ ተሳክቷል!",
+      "message": "በተሳካተ ለ",
+      "totalPrice": "ጠቅላላ ዋጋ:",
+      "currency": "ብር"
+    },
+    "confirmation": {
+      "title": "ድርጊቱን ያረጋግጡ",
+      "message": "ይቀጥል መሆንዎን እርግጠኛ ነዎት?",
+      "yes": "አዎ",
+      "no": "አይ"
+    },
+    "success": {
+      "title": "ተሳክቷል!",
+      "message": "ድርጊቱ በተሳካተ ተጠናቅቋል።",
+      "ok": "እሺ"
+    },
+    "editName": {
+      "title": "ስም አርትዕ",
+      "placeholder": "አዲስ ስም ያስገቡ",
+      "save": "አስቀምጥ",
+      "cancel": "ሰርዝ"
+    }
+  },
+  "settings": {
+    "inventory": {
+      "title": "የእቃዎች አስተዳደር",
+      "back": "ወደ ኋላ",
+      "save": "አስቀምጥ",
+      "sections": {
+        "inventoryList": {
+          "title": "የእቃዎች ዝርዝር",
+          "options": {
+            "showPurchasePrice": "የግዛት ዋጋ አሳይ",
+            "showSellingPrice": "የመሸጫ ዋጋ አሳይ",
+            "showStockInPieces": "የእቃ ስቶክ በቁርጥራጮች አሳይ",
+            "showStockInPacks": "የእቃ ስቶክ በጥራጊያዎች አሳይ"
+          }
+        },
+        "quickReport": {
+          "title": "ፈጣን ሪፖርት",
+          "options": {
+            "itemsSold": "የተሸጡ እቃዎች",
+            "itemsPurchased": "የተገዙ እቃዎች",
+            "payables": "የሚከፈል",
+            "receivables": "የሚቀበል"
+          }
+        }
+      }
+    },
+    "accounts": {
+      "title": "መለያዎች እና ጥበቃ",
+      "back": "ወደ ኋላ",
+      "save": "አስቀምጥ",
+      "sections": {
+        "accountInformation": {
+          "title": "የመለያ መረጃ",
+          "options": {
+            "changeEmailPhone": "ኢሜይል ወይም ስልክ ቁጥር ቀይር",
+            "changePassword": "የይለፍ ቃል ቀይር",
+            "editStoreName": "የሱቅ ስም አርትዕ",
+            "editStoreType": "የሱቅ አይነት አርትዕ"
+          },
+          "placeholders": {
+            "newEmailPhone": "አዲስ ኢሜይል ወይም ስልክ ቁጥር ያስገቡ",
+            "oldPassword": "የድሮ የይለፍ ቃል",
+            "newPassword": "አዲስ የይለፍ ቃል",
+            "newStoreName": "አዲስ የሱቅ ስም ያስገቡ",
+            "newStoreType": "አዲስ የሱቅ አይነት ያስገቡ"
+          }
+        },
+        "subscription": {
+          "title": "የደንበኝነት ሁኔታ",
+          "premiumRenewal": "የፕሪሚየም እድገት"
+        }
+      }
+    },
+    "detailed": {
+      "title": "ዝርዝር ሪፖርት",
+      "back": "ወደ ኋላ",
+      "durationSelector": {
+        "weekly": "የሳምንቱ",
+        "monthly": "የወሩ",
+        "annual": "የዓመቱ"
+      },
+      "sections": {
+        "generalReport": {
+          "title": "አጠቃላይ ሪፖርት",
+          "metrics": {
+            "totalPurchases": "ጠቅላላ ግዛቶች",
+            "totalSales": "ጠቅላላ ሽጥ",
+            "profit": "ትርፍ",
+            "payables": "የሚከፈል",
+            "receivables": "የሚቀበል",
+            "itemsSold": "የተሸጡ እቃዎች"
+          },
+          "graphAnalysis": {
+            "title": "የግራፍ ትንተና",
+            "variables": {
+              "profit": "ትርፍ",
+              "sales": "ጠቅላላ ሽጥ",
+              "purchases": "ጠቅላላ ግዛቶች"
+            }
+          }
+        },
+        "payables": {
+          "title": "የሚከፈል",
+          "headers": {
+            "itemName": "የእቃው ስም",
+            "amount": "መጠን",
+            "date": "ቀን"
+          }
+        },
+        "receivables": {
+          "title": "የሚቀበል",
+          "headers": {
+            "customerName": "የደንበኛው ስም",
+            "amount": "መጠን",
+            "date": "ቀን"
+          }
+        },
+        "history": {
+          "title": "ታሪክ"
+        },
+        "stockReport": {
+          "title": "የእቃ ስቶክ ሪፖርት",
+          "categories": {
+            "lowStock": "ዝቅተኛ ስቶክ",
+            "highStock": "ከፍተኛ ስቶክ",
+            "topSelling": "በጣም የሚሸጥ",
+            "lowDemand": "ዝቅተኛ ፍላጎት"
+          }
+        }
+      }
+    },
+    "language": {
+      "title": "የቋንቋ ቅንብሮች",
+      "back": "ወደ ኋላ",
+      "save": "አስቀምጥ",
+      "currentLanguage": "የአሁኑ ቋንቋ",
+      "selectLanguage": "ቋንቋ ይምረጡ",
+      "languages": {
+        "en": "English",
+        "am": "አማርኛ"
+      }
+    },
+    "contact": {
+      "title": "ያግኙን",
+      "back": "ወደ ኋላ",
+      "sections": {
+        "contactInformation": {
+          "title": "የመገናኛ መረጃ",
+          "phoneNumbers": "የስልክ ቁጥሮች:",
+          "email": "ኢሜይል:",
+          "telegram": "ቴሌግራም:"
+        }
+      }
+    },
+    "about": {
+      "title": "ስለ እኛ",
+      "back": "ወደ ኋላ",
+      "description": "አዘርኔት በኢትዮጵያ ውስጥ ቴክኖሎጂን በባለሀብት ስራዎች ውስጥ ለማዋሃድ የተዘጋጀ የንግድ ቡድን ነው። አዘርኔት ኢንቨንቶሪ ከዋና ዋና መተግበሪያዎቹ አንዱ ሲሆን ለአካባቢው ድርጅቶች የእቃዎች አስተዳደርን ለዘመናዊ እና ለቀለል ለማድረግ የተዘጋጀ ነው።"
+    }
+  },
+  "notifications": {
+    "success": "ተሳክቷል",
+    "error": "ስህተት",
+    "warning": "ማስጠንቀቂያ",
+    "info": "መረጃ"
+  },
+  "validation": {
+    "requiredFields": "እባክዎ ሁሉንም መስኮች ያስገቡ",
+    "notEnoughStock": "በቂ እቃ ስቶክ የለም",
+    "invalidAmount": "እባክዎ ትክክለኛ መጠን ያስገቡ",
+    "invalidPrice": "እባክዎ ትክክለኛ ዋጋ ያስገቡ"
+  },
+  "tables": {
+    "noData": "ዳሰሳ የለም",
+    "noPayables": "ዛሬ የሚከፈል ነገር የለም",
+    "noReceivables": "ዛሬ የሚቀበል ነገር የለም",
+    "noHistory": "ለዚህ ጊዜ ታሪክ የለም"
+  },
+  "common": {
+    "loading": "በመጫን ላይ...",
+    "noItemsFound": "እቃዎች አልተገኙም",
+    "tryAdjustingSearch": "የፍለጋ ቃላትዎን ያስተካክሉ",
+    "stock": "ስቶክ:",
+    "pieces": "ቁርጥራጮች",
+    "packs": "ጥራጊያዎች"
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "app": {
+    "title": "Inventory Management",
+    "storeName": "Store Name"
+  },
+  "header": {
+    "settings": "Settings",
+    "profile": "Profile"
+  },
+  "search": {
+    "placeholder": "Search item...",
+    "filter": "Filter"
+  },
+  "footer": {
+    "addItem": "Add Item",
+    "quickReport": "Quick Report",
+    "sellItems": "Sell Items"
+  },
+  "modals": {
+    "addItem": {
+      "title": "Add Item",
+      "close": "Close",
+      "imageUpload": "Add Image",
+      "form": {
+        "itemName": "Item Name:",
+        "itemType": "Item Type:",
+        "purchasePrice": "Purchase Price (ETB):",
+        "paymentStatus": "Payment Status",
+        "paid": "Paid",
+        "unpaid": "Unpaid",
+        "quantity": "Quantity:",
+        "packs": "Packs",
+        "pieces": "Pieces",
+        "pcsPerPack": "Pcs per Pack:",
+        "optional": "Optional",
+        "sellingPrice": "Selling Price (ETB):",
+        "description": "Description:",
+        "save": "Save"
+      }
+    },
+    "itemDetail": {
+      "edit": "Edit",
+      "close": "Close",
+      "actions": {
+        "add": "Add",
+        "delete": "Delete",
+        "sell": "Sell"
+      },
+      "sellForm": {
+        "amount": "Amount",
+        "unit": "Unit",
+        "unitPrice": "Unit Price",
+        "status": "Status",
+        "customerName": "Customer Name",
+        "sell": "Sell"
+      },
+      "addForm": {
+        "purchasePrice": "Purchase Price",
+        "paymentStatus": "Payment Status",
+        "amount": "Amount",
+        "unit": "Unit",
+        "save": "Save"
+      }
+    },
+    "sellItems": {
+      "close": "Close",
+      "counter": "0 / 0",
+      "navigation": {
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "sell": "Sell"
+    },
+    "quickReport": {
+      "close": "Close",
+      "title": "Daily Report",
+      "fields": {
+        "date": "Date",
+        "totalPurchases": "Total Purchases",
+        "totalSales": "Total Sales",
+        "profit": "Profit",
+        "payables": "Payables",
+        "receivables": "Receivables",
+        "itemsSold": "Number of Items Sold"
+      },
+      "actions": {
+        "itemsSold": "Items Sold",
+        "itemsPurchased": "Items Purchased",
+        "payables": "Payables",
+        "receivables": "Receivables"
+      }
+    },
+    "saleConfirmation": {
+      "close": "Close",
+      "title": "Sale Successful!",
+      "message": "You have successfully sold to",
+      "totalPrice": "Total Price:",
+      "currency": "ETB"
+    },
+    "confirmation": {
+      "title": "Confirm Action",
+      "message": "Are you sure you want to proceed?",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "success": {
+      "title": "Success!",
+      "message": "Operation completed successfully.",
+      "ok": "OK"
+    },
+    "editName": {
+      "title": "Edit Name",
+      "placeholder": "Enter new name",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "settings": {
+    "inventory": {
+      "title": "Inventory Management",
+      "back": "Back",
+      "save": "Save",
+      "sections": {
+        "inventoryList": {
+          "title": "Inventory List",
+          "options": {
+            "showPurchasePrice": "Show purchase price",
+            "showSellingPrice": "Show selling price",
+            "showStockInPieces": "Show stock in pieces",
+            "showStockInPacks": "Show stock in packs"
+          }
+        },
+        "quickReport": {
+          "title": "Quick Report",
+          "options": {
+            "itemsSold": "Items sold",
+            "itemsPurchased": "Items purchased",
+            "payables": "Payables",
+            "receivables": "Receivables"
+          }
+        }
+      }
+    },
+    "accounts": {
+      "title": "Accounts and Security",
+      "back": "Back",
+      "save": "Save",
+      "sections": {
+        "accountInformation": {
+          "title": "Account Information",
+          "options": {
+            "changeEmailPhone": "Change Email or Phone Number",
+            "changePassword": "Change Password",
+            "editStoreName": "Edit Store Name",
+            "editStoreType": "Edit Store Type"
+          },
+          "placeholders": {
+            "newEmailPhone": "Enter new email or phone",
+            "oldPassword": "Old password",
+            "newPassword": "New password",
+            "newStoreName": "Enter new store name",
+            "newStoreType": "Enter new store type"
+          }
+        },
+        "subscription": {
+          "title": "Subscription",
+          "premiumRenewal": "Premium Renewal"
+        }
+      }
+    },
+    "detailed": {
+      "title": "Detail Report",
+      "back": "Back",
+      "durationSelector": {
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "annual": "Annual"
+      },
+      "sections": {
+        "generalReport": {
+          "title": "General Report",
+          "metrics": {
+            "totalPurchases": "Total Purchases",
+            "totalSales": "Total Sales",
+            "profit": "Profit",
+            "payables": "Payables",
+            "receivables": "Receivables",
+            "itemsSold": "Items Sold"
+          },
+          "graphAnalysis": {
+            "title": "Graph Analysis",
+            "variables": {
+              "profit": "Profit",
+              "sales": "Total Sales",
+              "purchases": "Total Purchases"
+            }
+          }
+        },
+        "payables": {
+          "title": "Payables",
+          "headers": {
+            "itemName": "Item Name",
+            "amount": "Amount",
+            "date": "Date"
+          }
+        },
+        "receivables": {
+          "title": "Receivables",
+          "headers": {
+            "customerName": "Customer Name",
+            "amount": "Amount",
+            "date": "Date"
+          }
+        },
+        "history": {
+          "title": "History"
+        },
+        "stockReport": {
+          "title": "Stock Report",
+          "categories": {
+            "lowStock": "Low Stock",
+            "highStock": "High Stock",
+            "topSelling": "Top Selling",
+            "lowDemand": "Low Demand"
+          }
+        }
+      }
+    },
+    "language": {
+      "title": "Language Settings",
+      "back": "Back",
+      "save": "Save",
+      "currentLanguage": "Current Language",
+      "selectLanguage": "Select Language",
+      "languages": {
+        "en": "English",
+        "am": "አማርኛ"
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "back": "Back",
+      "sections": {
+        "contactInformation": {
+          "title": "Contact Information",
+          "phoneNumbers": "Phone Numbers:",
+          "email": "Email:",
+          "telegram": "Telegram:"
+        }
+      }
+    },
+    "about": {
+      "title": "About Us",
+      "back": "Back",
+      "description": "Azernet is a business group dedicated to integrating technology into traditional business practices in Ethiopia. Azernet Inventory is one of its flagship applications, designed to modernize and streamline inventory management for local enterprises."
+    }
+  },
+  "notifications": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "validation": {
+    "requiredFields": "Please fill in all fields",
+    "notEnoughStock": "Not enough stock available",
+    "invalidAmount": "Please enter a valid amount",
+    "invalidPrice": "Please enter a valid price"
+  },
+  "tables": {
+    "noData": "No data available",
+    "noPayables": "No payables today",
+    "noReceivables": "No receivables today",
+    "noHistory": "No history for this period"
+  },
+  "common": {
+    "loading": "Loading...",
+    "noItemsFound": "No items found",
+    "tryAdjustingSearch": "Try adjusting your search terms",
+    "stock": "Stock:",
+    "pieces": "pcs",
+    "packs": "packs"
+  }
+}
