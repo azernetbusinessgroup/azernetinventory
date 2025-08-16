@@ -469,10 +469,10 @@ function buildInventoryMetaLine(item, settings) {
     parts.push(`Packs: ${Number(item.quantityValue) || 0}`);
   }
   if (settings.inventory.showPurchasePrice) {
-    parts.push(`Buy: ${Number(item.purchasePrice || 0).toFixed(2)} ETB`);
+    parts.push(`Buy: ${Math.round(Number(item.purchasePrice || 0))} ETB`);
   }
   if (settings.inventory.showSellingPrice && item.sellingPrice) {
-    parts.push(`Sell: ${Number(item.sellingPrice || 0).toFixed(2)} ETB`);
+    parts.push(`Sell: ${Math.round(Number(item.sellingPrice || 0))} ETB`);
   }
   if (parts.length === 0) {
     return `<div class="item-stock">Stock: ${formatStock(item)}</div>`;
@@ -522,7 +522,7 @@ function openItemDetail(id) {
           <option value="pcs">Pcs</option>
           <option value="packs">Packs</option>
         </select>
-        <input type="number" id="sellPrice_${item.id}" placeholder="Unit Price" step="0.01" value="${item.sellingPrice || ''}">
+        <input type="number" id="sellPrice_${item.id}" placeholder="Unit Price" value="${item.sellingPrice || ''}">
         <select id="sellStatus_${item.id}" class="status-select">
           <option value="paid">Paid</option>
           <option value="unpaid">Unpaid</option>
@@ -536,7 +536,7 @@ function openItemDetail(id) {
 
     <div id="addForm_${item.id}" class="sell-form" style="display: none;">
       <div class="sell-form-row">
-        <input type="number" id="addPurchasePrice_${item.id}" placeholder="Purchase Price" step="0.01" value="${item.purchasePrice || ''}">
+        <input type="number" id="addPurchasePrice_${item.id}" placeholder="Purchase Price" value="${item.purchasePrice || ''}">
         <select id="addPaymentStatus_${item.id}" class="status-select">
           <option value="paid" ${item.paymentStatus === 'paid' ? 'selected' : ''}>Paid</option>
           <option value="unpaid" ${item.paymentStatus === 'unpaid' ? 'selected' : ''}>Unpaid</option>
@@ -645,8 +645,8 @@ function processSale(itemId) {
   // Record sale (basic local record per day)
   recordSale({ itemId: item.id, name: item.name, piecesSold, unitPrice: price, total: piecesSold * price, customerName, paymentStatus });
 
-  // Show success message using the same format as multi-sell
-  showSuccess(`Sale completed! ${piecesSold} pieces sold to ${customerName}`);
+  // Show unified sale confirmation modal
+  showUnifiedSaleConfirmation([{ item, piecesSold, price, customerName }]);
 }
 
 function editItem(id) {
@@ -1035,13 +1035,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Copy link button
-  const copyLinkBtn = document.getElementById('copyLinkBtn');
-  if (copyLinkBtn) {
-    copyLinkBtn.addEventListener('click', () => {
-      copyShopLink();
-    });
-  }
+
 
   // Quick report
   if (quickReportBtn && quickReportModal) {
@@ -1236,7 +1230,7 @@ function updateSellModalContent() {
           <option value="pcs" ${(savedData.unit || 'pcs') === 'pcs' ? 'selected' : ''}>Pcs</option>
           <option value="packs" ${(savedData.unit || 'pcs') === 'packs' ? 'selected' : ''}>Packs</option>
         </select>
-        <input type="number" id="ms_price" placeholder="Unit Price" step="0.01" value="${savedData.price || item.sellingPrice || ''}">
+        <input type="number" id="ms_price" placeholder="Unit Price" value="${savedData.price || item.sellingPrice || ''}">
         <select id="ms_status" class="status-select">
           <option value="paid" ${(savedData.paymentStatus || 'paid') === 'paid' ? 'selected' : ''}>Paid</option>
           <option value="unpaid" ${(savedData.paymentStatus || 'paid') === 'unpaid' ? 'selected' : ''}>Unpaid</option>
@@ -1432,7 +1426,16 @@ function processAllSales() {
   saveInventory();
   renderInventory();
   // Show confirmation and then reset selection
-  showSaleConfirmation();
+  showUnifiedSaleConfirmation(selectedItemIds.map(id => {
+    const item = inventory.find(i => i.id === id);
+    const data = multiSellData[id];
+    if (item && data) {
+      let piecesSold = parseInt(data.amount);
+      if (data.unit === 'packs') piecesSold = parseInt(data.amount) * item.amountInPack;
+      return { item, piecesSold, price: parseFloat(data.price), customerName: globalCustomerName };
+    }
+    return null;
+  }).filter(Boolean));
   document.getElementById('sellItemsModal').close();
   isSelectionMode = false;
   selectedItemIds = [];
@@ -1518,11 +1521,11 @@ function openQuickReport() {
   const btnRec = document.getElementById('qrBtnReceivables');
 
   dateEl.textContent = new Date().toLocaleDateString();
-  purchasesEl.textContent = totalPurchases.toFixed(2);
-  salesEl.textContent = totalSales.toFixed(2);
-  profitEl.textContent = profit.toFixed(2);
-  payablesEl.textContent = payables.toFixed(2);
-  receivablesEl.textContent = receivables.toFixed(2);
+      purchasesEl.textContent = Math.round(totalPurchases);
+    salesEl.textContent = Math.round(totalSales);
+    profitEl.textContent = Math.round(profit);
+    payablesEl.textContent = Math.round(payables);
+    receivablesEl.textContent = Math.round(receivables);
   itemsSoldEl.textContent = String(itemsSold);
 
   listEl.classList.add('hidden');
@@ -1578,7 +1581,7 @@ function showQuickList(type, container, sales) {
             <tr>
               <td>${name}</td>
               <td>${data.quantity} pcs</td>
-              <td>${data.total.toFixed(2)} ETB</td>
+              <td>${Math.round(data.total)} ETB</td>
             </tr>
           `).join('')}
         </tbody>
@@ -1608,7 +1611,7 @@ function showQuickList(type, container, sales) {
                 <tr>
                   <td>${item.name}</td>
                   <td>${pcs}</td>
-                  <td>${total.toFixed(2)} ETB</td>
+                  <td>${Math.round(total)} ETB</td>
                 </tr>
               `;
             }).join('')}
@@ -1644,7 +1647,7 @@ function showQuickList(type, container, sales) {
               return `
                 <tr>
                   <td>${item.name}</td>
-                  <td>${amount.toFixed(2)} ETB</td>
+                  <td>${Math.round(amount)} ETB</td>
                 </tr>
               `;
             }).join('')}
@@ -1684,7 +1687,7 @@ function showQuickList(type, container, sales) {
             ${Object.entries(customerTotals).map(([customer, amount]) => `
               <tr>
                 <td>${customer}</td>
-                <td>${amount.toFixed(2)} ETB</td>
+                <td>${Math.round(amount)} ETB</td>
               </tr>
             `).join('')}
           </tbody>
@@ -1700,42 +1703,38 @@ function showQuickList(type, container, sales) {
   fullScreenTable.classList.remove('hidden');
 }
 
-function showSaleConfirmation() {
+function showUnifiedSaleConfirmation(salesData) {
   const modal = document.getElementById('saleConfirmationModal');
   if (!modal) return;
   
-  // Get all sales data from multiSellData
-  const items = selectedItemIds.map(id => inventory.find(i => i.id === id)).filter(Boolean);
+  // Get the first customer name (all should be the same in a single sale)
+  const customerName = salesData[0]?.customerName || 'Customer';
+  const confirmationCustomerName = document.getElementById('confirmationCustomerName');
   const confirmationItems = document.getElementById('confirmationItems');
-  const confirmationMessage = document.getElementById('confirmationMessage');
   const confirmationTotal = document.getElementById('confirmationTotal');
   
   // Update customer name in message
-  confirmationMessage.textContent = `You have successfully sold to ${globalCustomerName}.`;
+  confirmationCustomerName.textContent = customerName;
   
   // Build items list
   let totalPrice = 0;
   let itemsHtml = '';
   
-  items.forEach((item, index) => {
-    const data = multiSellData[item.id];
-    if (data) {
-      let piecesSold = parseInt(data.amount);
-      if (data.unit === 'packs') {
-        piecesSold = parseInt(data.amount) * item.amountInPack;
-      }
-      const itemTotal = piecesSold * parseFloat(data.price);
-      totalPrice += itemTotal;
-      
-      itemsHtml += `<div>${piecesSold} ${item.name}</div>`;
-    }
+  salesData.forEach((sale) => {
+    const { item, piecesSold, price } = sale;
+    const itemTotal = piecesSold * price;
+    totalPrice += itemTotal;
+    
+    itemsHtml += `<div>${piecesSold} ${item.name}</div>`;
   });
   
   confirmationItems.innerHTML = itemsHtml;
-  confirmationTotal.textContent = totalPrice.toFixed(2);
+  confirmationTotal.textContent = Math.round(totalPrice);
   
   modal.showModal();
 }
+
+
 
 // Settings Functions
 function openSettingsPage(settingsType) {
@@ -1960,20 +1959,7 @@ function validateAndChangePassword(oldPassword, newPassword) {
   });
 }
 
-function copyShopLink() {
-  const shopLink = `${window.location.origin}/shop/${currentUser?.id || 'store'}`;
-  
-  // Use clipboard API if available, otherwise fallback to prompt
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(shopLink).then(() => {
-      showNotification('Shop link copied to clipboard!', 'success');
-    }).catch(() => {
-      prompt('Copy this link:', shopLink);
-    });
-  } else {
-    prompt('Copy this link:', shopLink);
-  }
-}
+
 
 function loadSettings() {
   try {
@@ -2028,20 +2014,7 @@ function loadSettings() {
       if (receivablesToggle) receivablesToggle.checked = true;
     }
     
-    // Apply share settings
-    if (savedSettings.share) {
-      const { showSellingPrice, showDescription, showItemType, showStock } = savedSettings.share;
-      
-      const shareSellingPriceToggle = document.getElementById('shareSellingPrice');
-      const shareDescriptionToggle = document.getElementById('shareDescription');
-      const shareItemTypeToggle = document.getElementById('shareItemType');
-      const shareStockToggle = document.getElementById('shareStock');
-      
-      if (shareSellingPriceToggle) shareSellingPriceToggle.checked = showSellingPrice;
-      if (shareDescriptionToggle) shareDescriptionToggle.checked = showDescription;
-      if (shareItemTypeToggle) shareItemTypeToggle.checked = showItemType;
-      if (shareStockToggle) shareStockToggle.checked = showStock;
-    }
+
   } catch (error) {
     console.warn('Failed to load settings:', error);
   }
@@ -2121,11 +2094,11 @@ function updateMetrics() {
     totalItemsSold: document.getElementById('totalItemsSold')
   };
   
-  if (elements.totalPurchases) elements.totalPurchases.textContent = `${totalPurchases.toFixed(2)} ETB`;
-  if (elements.totalSales) elements.totalSales.textContent = `${totalSales.toFixed(2)} ETB`;
-  if (elements.totalProfit) elements.totalProfit.textContent = `${profit.toFixed(2)} ETB`;
-  if (elements.totalPayables) elements.totalPayables.textContent = `${payables.toFixed(2)} ETB`;
-  if (elements.totalReceivables) elements.totalReceivables.textContent = `${receivables.toFixed(2)} ETB`;
+  if (elements.totalPurchases) elements.totalPurchases.textContent = `${Math.round(totalPurchases)} ETB`;
+  if (elements.totalSales) elements.totalSales.textContent = `${Math.round(totalSales)} ETB`;
+  if (elements.totalProfit) elements.totalProfit.textContent = `${Math.round(profit)} ETB`;
+  if (elements.totalPayables) elements.totalPayables.textContent = `${Math.round(payables)} ETB`;
+  if (elements.totalReceivables) elements.totalReceivables.textContent = `${Math.round(receivables)} ETB`;
   if (elements.totalItemsSold) elements.totalItemsSold.textContent = itemsSold.toString();
 }
 
@@ -2241,7 +2214,7 @@ function updatePayablesTable() {
       return `
         <tr>
           <td>${item.name}</td>
-          <td>${amount.toFixed(2)} ETB</td>
+          <td>${Math.round(amount)} ETB</td>
           <td>${date}</td>
         </tr>
       `;
@@ -2275,7 +2248,7 @@ function updateReceivablesTable() {
       return `
         <tr>
           <td>${customer}</td>
-          <td>${data.amount.toFixed(2)} ETB</td>
+          <td>${Math.round(data.amount)} ETB</td>
           <td>${date}</td>
         </tr>
       `;
