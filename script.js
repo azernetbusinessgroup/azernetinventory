@@ -169,14 +169,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (user) {
           console.log('Login successful for:', emailPhone);
           // Store user info in localStorage for inventory system
-          localStorage.setItem('currentUser', JSON.stringify({
+          const userData = {
             id: user.id,
             name: user.name,
             storeName: user.storeName,
             storeType: user.storeType,
             emailPhone: user.emailPhone,
-            profileImage: user.profileImage || ''
-          }));
+            profileImage: user.profileImage || 'assets/profile.png'
+          };
+          localStorage.setItem('currentUser', JSON.stringify(userData));
+          
+          // Also save to IndexedDB for persistence
+          saveUserToDB(userData);
+          
           window.location.href = 'inventory.html';
         } else {
           // Highlight password input in red for incorrect password
@@ -315,11 +320,15 @@ document.addEventListener('DOMContentLoaded', () => {
       storeName: userData.storeName,
       storeType: userData.storeType,
       emailPhone: userData.emailPhone,
-      password: userData.password
+      password: userData.password,
+      profileImage: 'assets/profile.png'
     };
     
     // Save to IndexedDB
     saveUserToDB(newUser);
+    
+    // Also save to localStorage for immediate access
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
     
     // Also update data.json to keep it in sync
     fetch('data.json')
