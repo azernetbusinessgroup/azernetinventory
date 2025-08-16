@@ -4,29 +4,29 @@ const DYNAMIC_CACHE = 'azernet-dynamic-v2.0.0';
 
 // Files to cache immediately
 const STATIC_FILES = [
-  '/',
-  '/index.html',
-  '/inventory.html',
-  '/auth.css',
-  '/auth.js',
-  '/inventory.css',
-  '/inventory.js',
-  '/pwa.js',
-  '/manifest.json',
-  '/assets/logo.png',
-  '/assets/favicon.ico',
-  '/assets/profile.png',
-  '/assets/settings.png',
-  '/assets/edit.png',
-  '/assets/back.png',
-  '/assets/close.png',
-  '/assets/filter.png',
-  '/assets/next.png',
-  '/assets/previous.png',
-  '/assets/on_off.png',
-  '/assets/placeholder.png',
-  '/assets/profile_icon.png',
-  '/assets/CBE.png'
+  './',
+  './index.html',
+  './inventory.html',
+  './auth.css',
+  './auth.js',
+  './inventory.css',
+  './inventory.js',
+  './pwa.js',
+  './manifest.json',
+  './assets/logo.png',
+  './assets/favicon.ico',
+  './assets/profile.png',
+  './assets/settings.png',
+  './assets/edit.png',
+  './assets/back.png',
+  './assets/close.png',
+  './assets/filter.png',
+  './assets/next.png',
+  './assets/previous.png',
+  './assets/on_off.png',
+  './assets/placeholder.png',
+  './assets/profile_icon.png',
+  './assets/CBE.png'
 ];
 
 // Install event - cache static files
@@ -119,7 +119,7 @@ async function cacheFirst(request, cacheName) {
     console.error('Cache first strategy failed:', error);
     // Return offline page for navigation requests
     if (request.mode === 'navigate') {
-      return caches.match('/index.html');
+      return caches.match('./index.html');
     }
     throw error;
   }
@@ -174,8 +174,8 @@ self.addEventListener('push', (event) => {
     const data = event.data.json();
     const options = {
       body: data.body || 'New notification from Azernet Inventory',
-      icon: '/assets/logo.png',
-      badge: '/assets/logo.png',
+      icon: './assets/logo.png',
+      badge: './assets/logo.png',
       vibrate: [100, 50, 100],
       data: {
         dateOfArrival: Date.now(),
@@ -185,12 +185,12 @@ self.addEventListener('push', (event) => {
         {
           action: 'explore',
           title: 'View',
-          icon: '/assets/logo.png'
+          icon: './assets/logo.png'
         },
         {
           action: 'close',
           title: 'Close',
-          icon: '/assets/logo.png'
+          icon: './assets/logo.png'
         }
       ]
     };
@@ -207,7 +207,7 @@ self.addEventListener('notificationclick', (event) => {
 
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/inventory.html')
+      clients.openWindow('./inventory.html')
     );
   }
 });
