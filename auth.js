@@ -94,11 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       localStorage.setItem('currentUser', JSON.stringify(userData));
       
-      // Also save to IndexedDB for persistence
-      if (typeof saveUserToDB === 'function') {
-        saveUserToDB(userData);
-      }
-      
       // Redirect to inventory page
       window.location.href = 'inventory.html';
     }
@@ -213,19 +208,14 @@ async function handleLogin() {
     // Store user data in localStorage for the inventory page
     const userData = {
       id: userCredential.user.uid,
-      name: userCredential.user.displayName || 'User',
+      name: userCredential.user.displayName,
       email: email,
-      storeName: (userCredential.user.displayName || 'User') + "'s Store",
+      storeName: userCredential.user.displayName + "'s Store",
       storeType: 'General',
       emailPhone: email,
       profileImage: 'assets/profile.png'
     };
     localStorage.setItem('currentUser', JSON.stringify(userData));
-    
-    // Also save to IndexedDB for persistence
-    if (typeof saveUserToDB === 'function') {
-      saveUserToDB(userData);
-    }
 
     showNotification(translations[currentLang].loginSuccess, 'success');
     
@@ -302,11 +292,6 @@ async function handleRegistration() {
       profileImage: 'assets/profile.png'
     };
     localStorage.setItem('currentUser', JSON.stringify(userData));
-    
-    // Also save to IndexedDB for persistence
-    if (typeof saveUserToDB === 'function') {
-      saveUserToDB(userData);
-    }
     
     showNotification(translations[currentLang].registrationSuccess, 'success');
     
