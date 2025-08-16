@@ -10,6 +10,9 @@ class PWA {
 
   async init() {
     try {
+      // Check if app is already installed
+      this.checkIfInstalled();
+      
       // Register service worker
       await this.registerServiceWorker();
       
@@ -34,7 +37,8 @@ class PWA {
   async registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        console.log('Attempting to register service worker...');
+        const registration = await navigator.serviceWorker.register('./service-worker.js');
         console.log('Service Worker registered successfully:', registration);
 
         // Handle service worker updates
@@ -69,8 +73,10 @@ class PWA {
   setupEventListeners() {
     // App install prompt
     window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('beforeinstallprompt event fired');
       e.preventDefault();
       this.deferredPrompt = e;
+      console.log('Deferred prompt stored:', this.deferredPrompt);
       this.showInstallPrompt();
     });
 
@@ -121,15 +127,29 @@ class PWA {
   }
 
   showInstallPrompt() {
+    console.log('Showing install prompt...');
+    
     // Create install button if it doesn't exist
     if (!this.installButton) {
       this.createInstallButton();
     }
     
     this.installButton.style.display = 'block';
+    console.log('Install button displayed');
+    
+    // Remove existing event listener to prevent duplicates
+    this.installButton.removeEventListener('click', this.installApp);
     this.installButton.addEventListener('click', () => {
+      console.log('Install button clicked');
       this.installApp();
     });
+    
+    // Show manual install button after 3 seconds if automatic prompt doesn't work
+    setTimeout(() => {
+      if (this.deferredPrompt) {
+        this.showManualInstallButton();
+      }
+    }, 3000);
   }
 
   createInstallButton() {
@@ -146,7 +166,7 @@ class PWA {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
       color: white;
       border: none;
       border-radius: 50px;
@@ -154,12 +174,13 @@ class PWA {
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
       z-index: 1000;
       display: none;
       flex-direction: column;
       align-items: center;
       transition: all 0.3s ease;
+      animation: pulse 2s infinite;
     `;
     
     this.installButton.addEventListener('mouseenter', () => {
@@ -375,7 +396,7 @@ class PWA {
     if ('Notification' in window && Notification.permission === 'granted') {
       const notification = new Notification('App Update Available', {
         body: 'A new version of Azernet Inventory is available. Refresh to update.',
-        icon: '/assets/logo.png',
+        icon: './assets/logo.png',
         tag: 'app-update'
       });
       
@@ -551,6 +572,59 @@ class PWA {
       return JSON.parse(localStorage.getItem('azernet_inventory') || '[]');
     }
   }
+
+  showManualInstallButton() {
+    // Create manual install instructions
+    const manualInstallDiv = document.createElement('div');
+    manualInstallDiv.id = 'manualInstallDiv';
+    manualInstallDiv.innerHTML = `
+      <div style="
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        max-width: 300px;
+        z-index: 999;
+        border: 2px solid #667eea;
+      ">
+        <h4 style="margin: 0 0 10px 0; color: #333;">📱 Install App Manually</h4>
+        <p style="margin: 0 0 15px 0; font-size: 14px; color: #666;">
+          Tap the share button <span style="font-size: 18px;">📤</span> in your browser and select "Add to Home Screen"
+        </p>
+        <button onclick="this.parentElement.remove()" style="
+          background: #667eea;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 14px;
+        ">Got it!</button>
+      </div>
+    `;
+    
+    document.body.appendChild(manualInstallDiv);
+    
+    // Auto-remove after 10 seconds
+    setTimeout(() => {
+      if (manualInstallDiv.parentNode) {
+        manualInstallDiv.remove();
+      }
+    }, 10000);
+  }
+
+  async checkIfInstalled() {
+    if (navigator.standalone) {
+      console.log('App is already installed (standalone mode)');
+      this.showNotification('App is already installed!', 'info');
+      this.hideInstallPrompt(); // Hide the install button if already installed
+    } else {
+      console.log('App is not installed (not in standalone mode)');
+    }
+  }
 }
 
 // Initialize PWA when DOM is loaded
@@ -569,6 +643,21 @@ style.textContent = `
     to {
       transform: translateX(0);
       opacity: 1;
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(46, 125, 50, 0.6);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
     }
   }
   
